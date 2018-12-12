@@ -3,8 +3,8 @@ Exam 1, problem 4.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Sam Hedrick.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -68,11 +68,33 @@ def problem4(number_of_stairs, step_size, starting_point, window):
       :type window:            rg.RoseWindow
     """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #          Tests have been written for you (above).
     # IMPORTANT: For PARTIAL CREDIT, you can draw just the black "bottoms"
     #            of the stair steps.
     # -------------------------------------------------------------------------
+    starting_point.attach_to(window)
+    window.render()
+    point1 = starting_point
+    point2 = rg.Point(starting_point.x + step_size, starting_point.y)
+    point3 = rg.Point(starting_point.x, starting_point.y - step_size)
+    for k in range(number_of_stairs):
+        ladder_point1 = rg.Point(point1.x + (step_size * k), point1.y - (step_size * (k + 1)))
+        ladder_point2 = rg.Point(point2.x + (step_size * k), point2.y - (step_size * (k + 1)))
+        line1 = rg.Line(ladder_point1, ladder_point2)
+        line1.thickness = 3
+        line1.attach_to(window)
+        magenta_point1 = rg.Point(point1.x + (step_size * k), point1.y - (step_size * (k)))
+        magenta_point2 = rg.Point(point3.x + (step_size * k), point3.y - (step_size * (k)))
+        line2 = rg.Line(magenta_point1, magenta_point2)
+        line2.color = 'magenta'
+        line2.thickness = 3
+        line2.attach_to(window)
+        window.render()
+    ending_point = ladder_point2
+    ending_point.attach_to(window)
+    window.render()
+
 
 
 # -----------------------------------------------------------------------------
